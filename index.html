@@ -128,28 +128,37 @@
 									<h2>Submit an Enquiry</h2>
 									<p>Fill out this quick form, and our expert team will contact you directly to discuss your travel needs.</p>
 								</header>
-									<!-- Updated action URL to connect directly to Web3Forms -->
-									<form action="https://api.web3forms.com/submit" method="POST" name="contact-form">
+									<!-- Main Form Element (Only one wrapper tag is needed) -->
+									<form action="https://api.web3forms.com/submit" method="POST" id="contact-form" name="contact-form">
 										
 										<!-- Your specific Web3Forms Form ID -->
 										<input type="hidden" name="access_key" value="338430ab-0b8a-41e4-9ca0-3e9991c26946">
 									
 										<div class="row gtr-uniform">
+											<!-- Name Field -->
 											<div class="col-6 col-12-xsmall">
 												<input type="text" name="enquirer-name" id="enquirer-name" value="" placeholder="Name" required />
 											</div>
+											
+											<!-- Email Field -->
 											<div class="col-6 col-12-xsmall">
 												<input type="email" name="enquirer-email" id="enquirer-email" value="" placeholder="Email" required />
 											</div>
+											
+											<!-- Category Dropdown Selection -->
 											<div class="col-12">
-												<select name="enquiry-type" id="enquiry-type" required>
-													<option value="">- Category -</option>
-													<option value="Air Ticketing">Air Ticketing</option>
-													<option value="Hotel & Accommodation">Hotel & Accommodation</option>
-													<option value="Car Hire & Transfers">Car Hire & Transfers</option>
-													<option value="Other Enquiry">Other Enquiry</option>
+												<select name="enquiry-type" id="enquiry-type" required 
+													style="color: rgba(255, 255, 255, 0.5); background-color: transparent;" 
+													onchange="this.style.color = this.value ? '#000000' : 'rgba(255, 255, 255, 0.5)';">
+													<option value="" style="color: #000;">- Category -</option>
+													<option value="Air Ticketing" style="color: #000;">Air Ticketing</option>
+													<option value="Hotel & Accommodation" style="color: #000;">Hotel & Accommodation</option>
+													<option value="Car Hire & Transfers" style="color: #000;">Car Hire & Transfers</option>
+													<option value="Other Enquiry" style="color: #000;">Other Enquiry</option>
 												</select>
 											</div>
+											
+											<!-- Priority Options -->
 											<div class="col-4 col-12-small">
 												<input type="radio" id="enquiry-priority-low" name="Enquiry Priority" value="Low">
 												<label for="enquiry-priority-low">Low</label>
@@ -162,18 +171,18 @@
 												<input type="radio" id="enquiry-priority-high" name="Enquiry Priority" value="High">
 												<label for="enquiry-priority-high">High</label>
 											</div>
-											<!-- Custom captcha checkbox removed. Web3Forms handles spam protection on their submission page automatically -->
+											
+											<!-- Web3Forms Native hCaptcha (Blends into template grid flawlessly) -->
+											<div class="col-12">
+												<div class="h-captcha" data-captcha="true"></div>
+											</div>
+									
+											<!-- Message Text Area -->
 											<div class="col-12">
 												<textarea name="enquiry-details" id="enquiry-details" placeholder="Enter your message" rows="6" required></textarea>
 											</div>
-											<form action="https://api.web3forms.com/submit" method="POST">
-											    <input type="hidden" name="access_key" value="338430ab-0b8a-41e4-9ca0-3e9991c26946">
-											    <input type="text" name="name" required>
-											    <input type="email" name="email" required>
-											    <textarea name="message" required></textarea>
-											    
-											    <! -- Step 1: Add this line -->
-											    <div class="h-captcha" data-captcha="true"></div>
+											
+											<!-- Action Buttons -->
 											<div class="col-12">
 												<ul class="actions">
 													<li><input type="submit" id="submit-btn" value="Send Message" class="primary" /></li>
