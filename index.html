@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<!-- 
+<!--
 	Stellar by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
@@ -128,11 +128,10 @@
 									<h2>Submit an Enquiry</h2>
 									<p>Fill out this quick form, and our expert team will contact you directly to discuss your travel needs.</p>
 								</header>
-																		<!-- Updated action URL to connect directly to Web3Forms -->
-									<!-- The opening form tag now has id="contact-form" to link with the validation script -->
-									<form action="https://api.web3forms.com/submit" method="POST" id="contact-form" name="contact-form">
+									<!-- Updated action URL to connect directly to Web3Forms -->
+									<form action="https://api.web3forms.com/submit" method="POST" name="contact-form">
 										
-										<!-- Your Web3Forms Form ID -->
+										<!-- Your specific Web3Forms Form ID -->
 										<input type="hidden" name="access_key" value="338430ab-0b8a-41e4-9ca0-3e9991c26946">
 									
 										<div class="row gtr-uniform">
@@ -143,15 +142,12 @@
 												<input type="email" name="enquirer-email" id="enquirer-email" value="" placeholder="Email" required />
 											</div>
 											<div class="col-12">
-												<!-- Switches dynamically from light grey to black when an option is selected -->
-												<select name="enquiry-type" id="enquiry-type" required 
-													style="color: rgba(255, 255, 255, 0.5); background-color: transparent;" 
-													onchange="this.style.color = this.value ? '#000000' : 'rgba(255, 255, 255, 0.5)';">
-													<option value="" style="color: #000;">- Category -</option>
-													<option value="Air Ticketing" style="color: #000;">Air Ticketing</option>
-													<option value="Hotel & Accommodation" style="color: #000;">Hotel & Accommodation</option>
-													<option value="Car Hire & Transfers" style="color: #000;">Car Hire & Transfers</option>
-													<option value="Other Enquiry" style="color: #000;">Other Enquiry</option>
+												<select name="enquiry-type" id="enquiry-type" required>
+													<option value="">- Category -</option>
+													<option value="Air Ticketing">Air Ticketing</option>
+													<option value="Hotel & Accommodation">Hotel & Accommodation</option>
+													<option value="Car Hire & Transfers">Car Hire & Transfers</option>
+													<option value="Other Enquiry">Other Enquiry</option>
 												</select>
 											</div>
 											<div class="col-4 col-12-small">
@@ -166,15 +162,18 @@
 												<input type="radio" id="enquiry-priority-high" name="Enquiry Priority" value="High">
 												<label for="enquiry-priority-high">High</label>
 											</div>
-									
-											<!-- Step 1: Web3Forms native hCaptcha placement -->
-											<div class="col-12">
-												<div class="h-captcha" data-captcha="true"></div>
-											</div>
-									
+											<!-- Custom captcha checkbox removed. Web3Forms handles spam protection on their submission page automatically -->
 											<div class="col-12">
 												<textarea name="enquiry-details" id="enquiry-details" placeholder="Enter your message" rows="6" required></textarea>
 											</div>
+											<form action="https://api.web3forms.com/submit" method="POST">
+											    <input type="hidden" name="access_key" value="338430ab-0b8a-41e4-9ca0-3e9991c26946">
+											    <input type="text" name="name" required>
+											    <input type="email" name="email" required>
+											    <textarea name="message" required></textarea>
+											    
+											    <! -- Step 1: Add this line -->
+											    <div class="h-captcha" data-captcha="true"></div>
 											<div class="col-12">
 												<ul class="actions">
 													<li><input type="submit" id="submit-btn" value="Send Message" class="primary" /></li>
@@ -232,22 +231,7 @@
 					submitButton.disabled = !this.checked;
 				});
 			</script>
-					<!-- Step 2: The Web3Forms Smart Captcha Script -->
 			<script src="https://web3forms.com/client/script.js" async defer></script>
-			
-			<!-- Step 3: Submission Verification Script (Targeting 'contact-form') -->
-			<script>
-			const form = document.getElementById('contact-form');
-			
-			form.addEventListener('submit', function(e) {
-			    const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
-			
-			    if (!hCaptcha) {
-			        e.preventDefault();
-			        alert("Please fill out the captcha field.");
-			        return;
-			    }
-			});
-			</script>
+
 	</body>
 </html>
