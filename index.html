@@ -150,7 +150,7 @@
 												<select name="enquiry-type" id="enquiry-type" required 
 													style="color: rgba(255, 255, 255, 0.5); background-color: transparent;" 
 													onchange="this.style.color = this.value ? '#000000' : 'rgba(255, 255, 255, 0.5)';">
-													<option value="" style="color: #000;">- Category -</option>
+													<option value="" style="color: #DDD;">- Category -</option>
 													<option value="Air Ticketing" style="color: #000;">Air Ticketing</option>
 													<option value="Hotel & Accommodation" style="color: #000;">Hotel & Accommodation</option>
 													<option value="Car Hire & Transfers" style="color: #000;">Car Hire & Transfers</option>
@@ -171,15 +171,15 @@
 												<input type="radio" id="enquiry-priority-high" name="Enquiry Priority" value="High">
 												<label for="enquiry-priority-high">High</label>
 											</div>
-											
-											<!-- Web3Forms Native hCaptcha (Blends into template grid flawlessly) -->
-											<div class="col-12">
-												<div class="h-captcha" data-captcha="true"></div>
-											</div>
 									
 											<!-- Message Text Area -->
 											<div class="col-12">
 												<textarea name="enquiry-details" id="enquiry-details" placeholder="Enter your message" rows="6" required></textarea>
+											</div>
+
+											<!-- Web3Forms Native hCaptcha (Blends into template grid flawlessly) -->
+											<div class="col-12">
+												<div class="h-captcha" data-captcha="true"></div>
 											</div>
 											
 											<!-- Action Buttons -->
