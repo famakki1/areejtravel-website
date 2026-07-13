@@ -312,15 +312,32 @@
 		
 		<!-- Randomize Marquee Images -->
 			<script>
-			  window.addEventListener('DOMContentLoaded', () => {
-			    const container = document.querySelector('.container');
-			    const images = Array.from(container.children);
+			  document.addEventListener("DOMContentLoaded", function () {
+			    const track = document.getElementById("marquee-track");
+			    if (!track) return;
+			
+			    // 1. Convert the HTML collection of images into a true array
+			    const images = Array.from(track.children);
+			
+			    // 2. Shuffle algorithm (Fisher-Yates) to randomize the array
+			    for (let i = images.length - 1; i > 0; i--) {
+			      const j = Math.floor(Math.random() * (i + 1));
+			      [images[i], images[j]] = [images[j], images[i]];
+			    }
+			
+			    // 3. Clear out the original unshuffled track
+			    track.innerHTML = "";
+			
+			    // 4. Append the newly shuffled images back into the track
+			    images.forEach(img => track.appendChild(img));
+			
+			    // 5. Clone the entire randomized track structure for the seamless infinite effect
+			    const wrapper = document.querySelector(".marquee-wrapper");
+			    const cloneTrack = track.cloneNode(true);
+			    cloneTrack.setAttribute("aria-hidden", "true"); // Hidden from screen readers
 			    
-			    // Shuffle the images randomly
-			    images.sort(() => Math.random() - 0.5);
-			    
-			    // Put them back into the container in the new order
-			    images.forEach(img => container.appendChild(img));
+			    // Append the clone right next to the original track
+			    wrapper.appendChild(cloneTrack);
 			  });
 			</script>
 		<!-- End -->
