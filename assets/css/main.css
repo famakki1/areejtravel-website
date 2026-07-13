@@ -3786,7 +3786,7 @@ input, select, textarea {
 
 /* Marquee Container - https://master.dev/blog/infinite-marquee-animation-using-modern-css/ */
 
-.container {
+.marqcontainer {
   --s: 150px; /* size of the logo */
   --d: 8s; /* animation duration*/
   --n: 4; /* number of visible logos */
@@ -3806,7 +3806,7 @@ img {
 
 
 /* extra styles */
-.container {
+.marqcontainer {
   border: 1px solid;
   padding-block: 5px;
   margin: 20px auto;
