@@ -3805,7 +3805,7 @@ input, select, textarea {
   align-items: center;
   
   /* The magic: moves the track exactly 100% of its width */
-  animation: scroll-marquee 40s linear infinite;
+  animation: scroll-marquee 100s linear infinite;
 }
 
 /* Pause the marquee on hover (Optional, but great for UX) */
