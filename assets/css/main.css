@@ -3816,7 +3816,7 @@ input, select, textarea {
 /* 3. Image styling - Keeps them uniform */
 .marquee-content img {
   height: 100px; /* Adjust height as needed */
-  width: auto;
+  width: 100px;
   object-fit: contain;
   border-radius: 4px; /* Matches Stellar's clean design aesthetic */
 }
