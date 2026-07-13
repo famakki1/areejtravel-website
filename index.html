@@ -25,13 +25,14 @@
 						<p style="color: black;">Providing smooth business itineraries, custom travel plans, and full booking support with great care.<br />
 					</header>
 
-				<!-- Nav -->
+				<!-- Navigation Bar -->
 					<nav id="nav">
 						<ul>
 							<li><a href="#intro" class="active">About Us</a></li>
-							<li><a href="#first">Our Services</a></li>
-							<li><a href="#second">Our Clients</a></li>
-							<li><a href="#cta">Submit an Enquiry</a></li>
+							<li><a href="#services">Our Services</a></li>
+							<li><a href="#airlines">Partner Airlines</a></li>
+							<li><a href="#clients">Our Clients</a></li>
+							<li><a href="#enquiry">Submit an Enquiry</a></li>
 							<li><a href="#footer">Contact Us</a></li>
 						</ul>
 					</nav>
@@ -53,8 +54,8 @@
 								</div>
 							</section>
 
-						<!-- First Section -->
-							<section id="first" class="main special">
+						<!-- Our Services -->
+							<section id="services" class="main special">
 								<header class="major">
 									<h2>Our Services</h2>
 								</header>
@@ -92,8 +93,73 @@
 								</ul>
 							</section>
 
-						<!-- Second Section -->
-							<section id="second" class="main special">
+						<!-- Our Partner Airlines -->
+							<section id="airlines" class="main special">
+								<header class="major">
+									<h2>Our Partner Airlines</h2>
+									<p>The world, within your reach. Our deep-rooted partnerships with leading global airlines allow us to seamlessly bridge the gap between where you are and where you want to be, no matter how you choose to fly.</p>
+								</header>
+									<div class="container">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic01.png">
+									  <img src="images/pic02.png">
+									  <img src="images/pic03.png">
+									  <img src="images/pic03.png">
+									<!-- <img src="images/gulfcryo.svg">  -->
+									</div>
+							</section>
+						
+						<!-- Our Clients -->
+							<section id="clients" class="main special">
 								<header class="major">
 									<h2>Our Clients</h2>
 									<p>We are proud to have supported and partnered with top-tier corporations, governmental entities, and global industry organizations over the years.</p>
@@ -122,8 +188,8 @@
 										</div>
 							</section>
 
-						<!-- Get Started -->
-							<section id="cta" class="main special">
+						<!-- Captcha Enquiry Form -->
+							<section id="enquiry" class="main special">
 								<header class="major">
 									<h2>Submit an Enquiry</h2>
 									<p>Fill out this quick form, and our expert team will contact you directly to discuss your travel needs.</p>
@@ -230,6 +296,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+		<!-- hCaptcha Script -->
 			<script>
 				const robotCheckbox = document.getElementById('demo-human');
 				const submitButton = document.getElementById('submit-btn');
@@ -240,6 +308,21 @@
 				});
 			</script>
 			<script src="https://web3forms.com/client/script.js" async defer></script>
+		
+		<!-- Randomize Marquee Images -->
+			<script>
+			  window.addEventListener('DOMContentLoaded', () => {
+			    const container = document.querySelector('.container');
+			    const images = Array.from(container.children);
+			    
+			    // Shuffle the images randomly
+			    images.sort(() => Math.random() - 0.5);
+			    
+			    // Put them back into the container in the new order
+			    images.forEach(img => container.appendChild(img));
+			  });
+			</script>
+		<!-- End -->
 
 	</body>
 </html>
