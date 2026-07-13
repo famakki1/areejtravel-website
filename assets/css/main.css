@@ -3783,37 +3783,3 @@ input, select, textarea {
 			}
 
 		}
-
-/* Marquee Container - https://master.dev/blog/infinite-marquee-animation-using-modern-css/ */
-
-.marqcontainer {
-  --s: 150px; /* size of the logo */
-  --d: 8s; /* animation duration*/
-  --n: 4; /* number of visible logos */
-  
-  display: flex;
-  overflow: hidden;
-}
-
-img {
-  width: var(--s);
-  offset: shape(from calc(var(--s)/-2) 50%,hline by calc(sibling-count()*max(100%/var(--n),var(--s) + 10px)));
-  animation: x var(--d) linear infinite calc(-1*sibling-index()*var(--d)/sibling-count());
-}
-@keyframes x { 
-  to {offset-distance: 100%}
-}
-
-
-/* extra styles */
-.marqcontainer {
-  border: 1px solid;
-  padding-block: 5px;
-  margin: 20px auto;
-}
-:nth-child(2 of .container) img {
-  animation-direction: reverse;
-}
-body {
-  background: #ffefd5;
-}
