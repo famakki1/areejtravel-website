@@ -3830,3 +3830,86 @@ input, select, textarea {
     transform: translateX(-100%);
   }
 }
+
+/* Marquee Multi Row */
+
+/* Stacked rows overall layout structure */
+.partner-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 2rem 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Individual crop bounds */
+.partner-row-wrapper {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* The horizontal slider track */
+.partner-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 60px; /* Space between airline logos */
+  min-width: max-content;
+  align-items: center;
+}
+
+/* Animation triggers using unique names */
+.direction-left {
+  animation: slide-track-left 60s linear infinite;
+}
+
+.direction-right {
+  animation: slide-track-right 60s linear infinite;
+}
+
+/* Global hover state pause control */
+.partner-grid-container:hover .partner-track {
+  animation-play-state: paused;
+}
+
+/* Logo image styling constraints */
+.partner-track img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.65;
+  transition: all 0.25s ease-in-out;
+}
+
+.partner-track img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Precise Loop Keyframes */
+@keyframes slide-track-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes slide-track-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Responsive breakdowns for mobile displays */
+@media screen and (max-width: 736px) {
+  .partner-grid-container {
+    gap: 16px;
+  }
+  .partner-track img {
+    height: 40px;
+  }
+  .partner-track {
+    gap: 35px;
+  }
+}
