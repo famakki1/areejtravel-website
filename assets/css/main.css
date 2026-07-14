@@ -3869,24 +3869,23 @@ input, select, textarea {
   animation: slide-track-right 60s linear infinite;
 }
 
-/* Global hover state pause control */
-.partner-grid-container:hover .partner-track {
-  animation-play-state: paused;
-}
+/* REMOVED: The hover-pause block has been completely deleted so it keeps scrolling continuously */
 
 /* Logo image styling constraints */
 .partner-track img {
-  height: 60px;
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.65;
-  transition: all 0.25s ease-in-out;
+  /* Restricts bounds strictly to 100x100px */
+  width: 100px;
+  height: 100px;
+  
+  /* Prevents distortion; scales the logo inside the 100x100 box perfectly */
+  object-fit: contain; 
+  
+  /* REMOVED: Grayscale and opacity filters are gone. Logos now show in full color by default */
+  transition: transform 0.25s ease-in-out;
 }
 
+/* Clean, simple zoom effect on hover */
 .partner-track img:hover {
-  filter: grayscale(0%);
-  opacity: 1;
   transform: scale(1.08);
 }
 
@@ -3906,8 +3905,10 @@ input, select, textarea {
   .partner-grid-container {
     gap: 16px;
   }
+  /* Keeps layout compact on smaller mobile screens while maintaining square bounds */
   .partner-track img {
-    height: 40px;
+    width: 70px;
+    height: 70px;
   }
   .partner-track {
     gap: 35px;
