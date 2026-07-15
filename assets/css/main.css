@@ -3785,55 +3785,10 @@ input, select, textarea {
 		}
 
 
-/* 1. The outer container hides the scrollbar and crops the edges */
-.marquee-wrapper {
-  display: flex;
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  padding: 2rem 0;
-  background: transparent; /* Seamlessly blends into Stellar's backgrounds */
-}
+/* ==========================================================================
+   INFINITE SCROLL MARQUEE SYSTEM
+   ========================================================================== */
 
-/* 2. The track holding the images */
-.marquee-content {
-  display: flex;
-  flex-shrink: 0;
-  gap: 20px; /* Space between images */
-  min-width: 100%;
-  justify-content: space-around;
-  align-items: center;
-  
-  /* The magic: moves the track exactly 100% of its width */
-  animation: scroll-marquee 100s linear infinite;
-}
-
-/* Pause the marquee on hover (Optional, but great for UX) */
-.marquee-wrapper:hover .marquee-content {
-  animation-play-state: paused;
-}
-
-/* 3. Image styling - Keeps them uniform */
-.marquee-content img {
-  height: 100px; /* Adjust height as needed */
-  width: 100px;
-  object-fit: contain;
-  border-radius: 4px; /* Matches Stellar's clean design aesthetic */
-}
-
-/* 4. The Animation */
-@keyframes scroll-marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* Marquee Multi Row */
-
-/* Stacked rows overall layout structure */
 .partner-grid-container {
   display: flex;
   flex-direction: column;
@@ -3843,74 +3798,77 @@ input, select, textarea {
   overflow: hidden;
 }
 
-/* Individual crop bounds */
 .partner-row-wrapper {
   display: flex;
   overflow: hidden;
   width: 100%;
-  position: relative;
 }
 
-/* The horizontal slider track */
 .partner-track {
   display: flex;
+  width: max-content;
   flex-shrink: 0;
-  gap: 60px; /* Space between airline logos */
-  min-width: max-content;
-  align-items: center;
 }
 
-/* Animation triggers using unique names */
+/* Identical flex containers containing the actual images */
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 60px; /* Space between logo files */
+  padding-right: 60px; /* Essential gap stabilizer */
+  flex-shrink: 0;
+}
+
+.partner-track img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.partner-track img:hover {
+  transform: scale(1.1);
+}
+
+/* Animations using the dynamic width custom property */
 .direction-left {
-  animation: slide-track-left 60s linear infinite;
+  animation: scroll-left-dynamic 30s linear infinite;
 }
 
 .direction-right {
-  animation: slide-track-right 60s linear infinite;
+  animation: scroll-right-dynamic 30s linear infinite;
 }
 
-/* REMOVED: The hover-pause block has been completely deleted so it keeps scrolling continuously */
-
-/* Logo image styling constraints */
-.partner-track img {
-  /* Restricts bounds strictly to 100x100px */
-  width: 100px;
-  height: 100px;
-  
-  /* Prevents distortion; scales the logo inside the 100x100 box perfectly */
-  object-fit: contain; 
-  
-  /* REMOVED: Grayscale and opacity filters are gone. Logos now show in full color by default */
-  transition: transform 0.25s ease-in-out;
+@keyframes scroll-left-dynamic {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    /* Moves exactly the width of one group, resulting in a flawless loop */
+    transform: translate3d(calc(-1 * var(--row-width)), 0, 0);
+  }
 }
 
-/* Clean, simple zoom effect on hover */
-.partner-track img:hover {
-  transform: scale(1.08);
+@keyframes scroll-right-dynamic {
+  0% {
+    transform: translate3d(calc(-1 * var(--row-width)), 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-/* Precise Loop Keyframes */
-@keyframes slide-track-left {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes slide-track-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
-}
-
-/* Responsive breakdowns for mobile displays */
 @media screen and (max-width: 736px) {
   .partner-grid-container {
     gap: 16px;
   }
-  /* Keeps layout compact on smaller mobile screens while maintaining square bounds */
+  .marquee-group {
+    gap: 35px;
+    padding-right: 35px;
+  }
   .partner-track img {
     width: 70px;
     height: 70px;
   }
-  .partner-track {
-    gap: 35px;
-  }
 }
+
