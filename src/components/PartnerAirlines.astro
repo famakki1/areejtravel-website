@@ -1,0 +1,135 @@
+---
+// src/components/PartnerAirlines.astro
+
+// Keep the master list clean in the frontmatter (no server-side shuffling needed here anymore)
+const allAirlines = [
+  { src: "/images/airlines/saudia.svg", alt: "Saudia" },
+  { src: "/images/airlines/egyptair.svg", alt: "EgyptAir" },
+  { src: "/images/airlines/philippines.svg", alt: "Philippine Airlines" },
+  { src: "/images/airlines/airarabia.svg", alt: "Air Arabia" },
+  { src: "/images/airlines/emirates.svg", alt: "Emirates" },
+  { src: "/images/airlines/salamair.svg" , alt: "SalamAir" },
+  { src: "/images/airlines/klm.svg", alt: "KLM" },
+  { src: "/images/airlines/indigo.svg", alt: "IndiGo" },
+  { src: "/images/airlines/royalairmaroc.svg", alt: "Royal Air Maroc" },
+  { src: "/images/airlines/thai.svg", alt: "Thai Airways" },
+  { src: "/images/airlines/british.svg", alt: "British Airways" },
+  { src: "/images/airlines/mea.svg", alt: "MEA" },
+  { src: "/images/airlines/jazeera.svg", alt: "Jazeera Airways" },
+  { src: "/images/airlines/biman.svg", alt: "Biman Bangladesh" },
+  { src: "/images/airlines/wizz.svg", alt: "Wizz Air" },
+  { src: "/images/airlines/singapore.svg", alt: "Singapore Airlines" },
+  { src: "/images/airlines/omanair.svg", alt: "Oman Air" },
+  { src: "/images/airlines/etihad.svg", alt: "Etihad Airways" },
+  { src: "/images/airlines/cathay.svg", alt: "Cathay Pacific" },
+  { src: "/images/airlines/airbaltic.svg", alt: "airBaltic" },
+  { src: "/images/airlines/airfrance.svg", alt: "Air France" },
+  { src: "/images/airlines/srilankan.svg", alt: "SriLankan Airlines" },
+  { src: "/images/airlines/eurowings.svg", alt: "Eurowings" },
+  { src: "/images/airlines/turkish.svg", alt: "Turkish Airlines" },
+  { src: "/images/airlines/qatar.svg", alt: "Qatar Airways" },
+  { src: "/images/airlines/azerbaijanairlines.svg", alt: "Azerbaijan Airlines" },
+  { src: "/images/airlines/ethiopian.svg", alt: "Ethiopian Airlines" },
+  { src: "/images/airlines/flydubai.svg", alt: "flydubai" },
+  { src: "/images/airlines/malaysian.svg", alt: "Malaysia Airlines" },
+  { src: "/images/airlines/lufthansa.svg", alt: "Lufthansa" },
+  { src: "/images/airlines/aircanada.svg", alt: "Air Canada" },
+  { src: "/images/airlines/serene.svg", alt: "Serene Air" },
+  { src: "/images/airlines/airindia.svg", alt: "Air India" },
+  { src: "/images/airlines/royaljordanian.svg", alt: "Royal Jordanian" },
+  { src: "/images/airlines/flyadeal.svg", alt: "flyadeal" },
+  { src: "/images/airlines/united.svg", alt: "United Airlines" },
+  { src: "/images/airlines/kuwait.svg" , alt: "Kuwait Airways" },
+  { src: "/images/airlines/gulfair.svg", alt: "Gulf Air" },
+  { src: "/images/airlines/pia.svg", alt: "PIA" }
+];
+---
+
+<section id="airlines" class="main special">
+  <header class="major">
+    <h2>Our Partner Airlines</h2>
+    <p>The world, within your reach. Our deep-rooted partnerships with leading global airlines allow us to seamlessly bridge the gap between where you are and where you want to be, no matter how you choose to fly.</p>
+  </header>
+  
+  <div class="partner-grid-container">
+    <div class="partner-row-wrapper">
+      <div class="partner-track direction-left marquee-row" data-row-index="0"></div>
+    </div>
+    
+    <div class="partner-row-wrapper">
+      <div class="partner-track direction-right marquee-row" data-row-index="1"></div>
+    </div>
+    
+    <div class="partner-row-wrapper">
+      <div class="partner-track direction-left marquee-row" data-row-index="2"></div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ allAirlines }}>
+  // This passes the array defined in the frontmatter safely into the browser scope
+  window.MASTER_AIRLINE_POOL = allAirlines;
+</script>
+
+<script>
+  function initializeDynamicMarquees() {
+    const marqueeRows = document.querySelectorAll('.marquee-row') as NodeListOf<HTMLElement>;
+    const pool = (window as any).MASTER_AIRLINE_POOL;
+    
+    if (!pool || pool.length === 0 || marqueeRows.length === 0) return;
+
+    // 1. Client-side Fisher-Yates shuffle of the master pool (Runs instantly in the browser on load)
+    const shuffledPool = [...pool];
+    for (let i = shuffledPool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledPool[i], shuffledPool[j]] = [shuffledPool[j], shuffledPool[i]];
+    }
+
+    // 2. Chop the randomized pool into 3 equal parts
+    const itemsPerRow = Math.ceil(shuffledPool.length / 3);
+    const rowsData = [
+      shuffledPool.slice(0, itemsPerRow),
+      shuffledPool.slice(itemsPerRow, itemsPerRow * 2),
+      shuffledPool.slice(itemsPerRow * 2)
+    ];
+
+    marqueeRows.forEach(row => {
+      if (row.hasAttribute('data-marquee-active')) return;
+
+      const rowIndex = parseInt(row.getAttribute('data-row-index') || '0', 10);
+      const rowItems = rowsData[rowIndex] || [];
+
+      // 3. Dynamically generate and append image elements
+      const firstGroup = document.createElement('div');
+      firstGroup.className = 'marquee-group';
+
+      rowItems.forEach(item => {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt;
+        firstGroup.appendChild(img);
+      });
+      
+      // 4. Clone the group container exactly for the seamless layout offset
+      const secondGroup = firstGroup.cloneNode(true) as HTMLElement;
+      secondGroup.setAttribute('aria-hidden', 'true');
+      
+      row.appendChild(firstGroup);
+      row.appendChild(secondGroup);
+
+      // 5. Instantly calculate and set the width custom property
+      const rowWidth = firstGroup.getBoundingClientRect().width;
+      row.style.setProperty('--row-width', `${rowWidth}px`);
+      
+      row.setAttribute('data-marquee-active', 'true');
+    });
+  }
+
+  // Hook into dynamic loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDynamicMarquees);
+  } else {
+    initializeDynamicMarquees();
+  }
+  window.addEventListener('load', initializeDynamicMarquees);
+</script>

@@ -1,0 +1,80 @@
+---
+// src/components/EnquiryForm.astro
+// Separating forms into components makes it easier to handle complex validation
+// or swap out form providers (like Web3Forms) in the future without touching the layout.
+---
+<section id="enquiry" class="main special">
+	<header class="major">
+		<h2>Submit an Enquiry</h2>
+		<p>Fill out this quick form, and our expert team will contact you directly to discuss your travel needs.</p>
+	</header>
+	
+	<form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+		<input type="hidden" name="access_key" value="338430ab-0b8a-41e4-9ca0-3e9991c26946">
+	
+		<div class="row gtr-uniform">
+			<div class="col-6 col-12-xsmall">
+				<input type="text" name="enquirer-name" id="enquirer-name" value="" placeholder="Name" required />
+			</div>
+			
+			<div class="col-6 col-12-xsmall">
+				<input type="email" name="enquirer-email" id="enquirer-email" value="" placeholder="Email" required />
+			</div>
+			
+			<div class="col-12">
+				<select name="enquiry-type" id="enquiry-type" required>
+					<!-- Use &nbsp; for empty option values to avoid HTML parsing issues -->
+					<option value="">&nbsp;</option>
+					<option value="Air Ticketing">Air Ticketing</option>
+					<option value="Hotel & Accommodation">Hotel & Accommodation</option>
+					<option value="Car Hire & Transfers">Car Hire & Transfers</option>
+					<option value="Event Management">Event Management</option>
+					<option value="Other Enquiry">Other Enquiry</option>
+				</select>
+			</div>
+			
+			<div class="col-4 col-12-small">
+				<input type="radio" id="enquiry-priority-low" name="Enquiry Priority" value="Low">
+				<label for="enquiry-priority-low">Low</label>
+			</div>
+			<div class="col-4 col-12-small">
+				<input type="radio" id="enquiry-priority-normal" name="Enquiry Priority" value="Normal" checked>
+				<label for="enquiry-priority-normal">Normal</label>
+			</div>
+			<div class="col-4 col-12-small">
+				<input type="radio" id="enquiry-priority-high" name="Enquiry Priority" value="High">
+				<label for="enquiry-priority-high">High</label>
+			</div>
+	
+			<div class="col-12">
+				<textarea name="enquiry-details" id="enquiry-details" placeholder="Enter your message" rows="6" required></textarea>
+			</div>
+
+			<div class="col-12">
+				<div class="h-captcha" data-captcha="true"></div>
+			</div>
+			
+			<div class="col-12">
+				<ul class="actions">
+					<li><input type="submit" id="submit-btn" value="Send Message" class="primary" /></li>
+					<li><input type="reset" value="Reset" /></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</section>
+
+<script>
+	// Form interaction logic is scoped right next to the HTML it controls.
+	// We wrap this in DOMContentLoaded to ensure elements exist before checking them.
+	document.addEventListener('DOMContentLoaded', () => {
+		const robotCheckbox = document.getElementById('demo-human') as HTMLInputElement;
+		const submitButton = document.getElementById('submit-btn') as HTMLButtonElement;
+
+		if (robotCheckbox && submitButton) {
+			robotCheckbox.addEventListener('change', function() {
+				submitButton.disabled = !this.checked;
+			});
+		}
+	});
+</script>
