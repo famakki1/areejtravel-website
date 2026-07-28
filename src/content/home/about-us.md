@@ -1,0 +1,9 @@
+---
+title: About Us
+image: /images/airplanes.jpg
+order: 1
+---
+
+<p style="text-align: justify;">Established in 2012 with headquarters in Al Khobar, Areej Travel & Tours Agency operates as a premier, full-service corporate travel management firm specializing in end-to-end solutions for Saudi Arabia’s enterprise sector. Fully IATA-accredited, our operations are backed by a leadership team with continuous active experience in the Kingdom’s corporate travel sector extending back to 1987. This deep market heritage, combined with modern agility, allows us to seamlessly manage complex logistics and optimize travel expenditures for prominent enterprise clients and multinational corporations operating within the region.</p>
+
+<p style="text-align: justify;">While our primary focus is supporting the operational demands of businesses within the Kingdom, Areej Travel maintains an expansive global network and strategic international partnerships spanning multiple continents. This robust infrastructure ensures that whether our clients require domestic transit or complex multinational itineraries, we deliver consistent, reliable, and high-quality service every step of the way.</p>

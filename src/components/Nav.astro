@@ -1,13 +1,44 @@
 ---
-// src/components/Nav.astro
+import { getCollection } from 'astro:content';
+
+const navSectionConfig = {
+	'about-us': { href: '#intro' },
+	services: { href: '#services' },
+	airlines: { href: '#airlines' },
+	clients: { href: '#clients' },
+	enquiry: { href: '#enquiry' },
+	location: { href: '#location' },
+} as const;
+
+const sections = await getCollection('home');
+type HomeSection = (typeof sections)[number];
+const getSectionSlug = (section: HomeSection): string => section.id.replace(/\.md$/, '');
+type NavHref = (typeof navSectionConfig)[keyof typeof navSectionConfig]['href'];
+type NavLink = { href: NavHref; label: string; order: number };
+
+const navLinks = sections
+	.map((section) => {
+		const slug = getSectionSlug(section) as keyof typeof navSectionConfig;
+		const config = navSectionConfig[slug];
+
+		if (!config) {
+			return null;
+		}
+
+		return {
+			href: config.href,
+			label: section.data.title,
+			order: section.data.order ?? Number.MAX_SAFE_INTEGER,
+		};
+	})
+		.filter((link): link is NavLink => link !== null)
+	.sort((a, b) => a.order - b.order);
 ---
 <nav id="nav">
 	<ul>
-		<li><a href="#intro" class="active">About Us</a></li>
-		<li><a href="#services">Our Services</a></li>
-		<li><a href="#airlines">Partner Airlines</a></li>
-		<li><a href="#clients">Our Clients</a></li>
-		<li><a href="#enquiry">Submit an Enquiry</a></li>
+		{navLinks.map((link, index) => (
+			<li><a href={link.href} class={index === 0 ? 'active' : undefined}>{link.label}</a></li>
+		))}
 		<li><a href="#footer">Contact Us</a></li>
 	</ul>
 </nav>

@@ -2,18 +2,25 @@
 // src/layouts/BaseLayout.astro
 // The frontmatter (between the --- lines) is where server-side JavaScript/TypeScript runs.
 // We define a 'title' prop so each page can inject its own tab title.
+import Footer from '../components/Footer.astro';
+
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = 'Areej Travel & Tours in Al-Khobar provides corporate travel management, air ticketing, hotel booking, transfers, and visa support across Saudi Arabia.',
+} = Astro.props as Props;
 ---
 
 <html lang="en">
 	<head>
 		<title>{title}</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+		<meta name="description" content={description} />
 		
 		<!-- 
 			Assets placed in the public/ folder are referenced directly from the root '/'. 
@@ -46,6 +53,7 @@ const { title } = Astro.props;
 				will be injected exactly where this <slot /> tag is.
 			-->
 			<slot />
+			<Footer />
 		</div>
 
 		<!-- 

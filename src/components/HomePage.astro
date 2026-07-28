@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import AboutUs from './AboutUs.astro';
+import Services from './Services.astro';
+import PartnerAirlines from './PartnerAirlines.astro';
+import Clients from './Clients.astro';
+import EnquiryForm from './EnquiryForm.astro';
+import LocationMap from './LocationMap.astro';
+
+const sections = await getCollection('home');
+type HomeSection = (typeof sections)[number];
+const getSectionSlug = (section: HomeSection): string => section.id.replace(/\.md$/, '');
+const availableSectionSlugs = new Set(['about-us', 'services', 'airlines', 'clients', 'enquiry', 'location']);
+const orderedSections = sections
+  .filter((section) => availableSectionSlugs.has(getSectionSlug(section)))
+  .sort((a, b) => (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER));
+---
+
+<div id="main">
+  {orderedSections.map((section) => {
+    const slug = getSectionSlug(section);
+
+    if (slug === 'about-us') {
+      return <AboutUs content={section} />;
+    }
+
+    if (slug === 'services') {
+      return <Services content={section} />;
+    }
+
+    if (slug === 'airlines') {
+      return <PartnerAirlines content={section} />;
+    }
+
+    if (slug === 'clients') {
+      return <Clients content={section} />;
+    }
+
+    if (slug === 'enquiry') {
+      return <EnquiryForm content={section} />;
+    }
+
+    if (slug === 'location') {
+      return <LocationMap content={section} />;
+    }
+
+    return null;
+  })}
+</div>

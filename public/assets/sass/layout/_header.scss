@@ -7,7 +7,7 @@
 /* Header */
 
 	#header {
-		@include padding(5em, 5em, (0, 0, -2em, 0));
+		@include padding(3em, 5em, (0, 0, 1em, 0));
 		text-align: center;
 
 		h1 {
@@ -15,15 +15,15 @@
 		}
 
 		p {
-			font-size: 1.25em;
+			font-size: 1.15em;
 			letter-spacing: _font(letter-spacing);
 		}
 
 		&.alt {
-			@include padding(6em, 5em, (1em, 0, 0, 0));
+			@include padding(2.5em, 5em, (0.5em, 0, 0.75em, 0));
 
 			h1 {
-				font-size: 3.25em;
+				font-size: 2.5em;
 			}
 
 			> * {
@@ -39,34 +39,34 @@
 				));
 				@include vendor('transition-delay', '0s');
 				display: block;
-				margin: 0 0 (_size(element-margin) * 0.75) 0;
+				margin: 0 0 (_size(element-margin) * 0.35) 0;
 
 				img {
 					display: block;
 					margin: 0 auto;
-					max-width: 75%;
+					max-width: 58%;
 				}
 			}
 		}
 
 		@include breakpoint('<=large') {
-			@include padding(4em, 4em, (0, 0, -2em, 0));
+			@include padding(2.5em, 4em, (0, 0, 1em, 0));
 
 			&.alt {
-				@include padding(5em, 4em, (1em, 0, 0, 0));
+				@include padding(2.25em, 4em, (0.5em, 0, 0.5em, 0));
 			}
 		}
 
 		@include breakpoint('<=medium') {
-			@include padding(4em, 3em, (0, 0, -2em, 0));
+			@include padding(2.5em, 3em, (0, 0, 1em, 0));
 
 			&.alt {
-				@include padding(4em, 3em, (1em, 0, 0, 0));
+				@include padding(2.25em, 3em, (0.5em, 0, 0.5em, 0));
 			}
 		}
 
 		@include breakpoint('<=small') {
-			@include padding(3em, 2em, (0, 0, -1em, 0));
+			@include padding(2.25em, 2em, (0, 0, 0.75em, 0));
 
 			p {
 				font-size: 1em;
@@ -78,27 +78,27 @@
 			}
 
 			&.alt {
-				@include padding(3em, 2em, (1em, 0, 0, 0));
+				@include padding(2em, 2em, (0.5em, 0, 0.5em, 0));
 
 				h1 {
-					font-size: 2.5em;
+					font-size: 2em;
 				}
 			}
 		}
 
 		@include breakpoint('<=xsmall') {
-			@include padding(3em, 1.5em, (0, 0, -1em, 0));
+			@include padding(2em, 1.5em, (0, 0, 0.5em, 0));
 
 			&.alt {
-				@include padding(3em, 1.5em, (1em, 0, 0, 0));
+				@include padding(2em, 1.5em, (0.5em, 0, 0.5em, 0));
 			}
 		}
 
 		@include breakpoint('<=xxsmall') {
-			@include padding(2.5em, 1em, (0, 0, -1em, 0));
+			@include padding(1.75em, 1em, (0, 0, 0.5em, 0));
 
 			&.alt {
-				@include padding(2.5em, 1em, (1em, 0, 0, 0));
+				@include padding(1.75em, 1em, (0.5em, 0, 0.5em, 0));
 			}
 		}
 
